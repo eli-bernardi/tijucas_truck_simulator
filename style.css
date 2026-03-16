@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+.game-header {
+    background: #0f3460;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px 10px 0 0;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stats span {
+    font-weight: bold;
+}
+
+#dinheiro { color: #4caf50; }
+#carga { color: #ff6b6b; }
+#fase { color: #f1c40f; }
+
+.carga-info {
+    background: #1a1a2e;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+#cargaNome { color: #ff6b6b; margin-right: 10px; }
+#cargaValor { color: #4caf50; }
+
+canvas {
+    border: 3px solid #e94560;
+    background: #87CEEB;
+    display: block;
+}
+
+footer {
+    background: #0f3460;
+    color: white;
+    padding: 10px;
+    width: 500px;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Modal Game Over */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #1a1a2e;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    border: 3px solid #e94560;
+}
+
+.modal-content h2 {
+    color: #e94560;
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    background: #e94560;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.modal-content button:hover {
+    background: #ff6b8b;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    
+    <!-- PRIMEIRO: Classe base (OBRIGATÓRIO) -->
+    <script src="./models/Obj.js" defer></script>
+    
+    <!-- SEGUNDO: Classes que dependem de Obj -->
+    <script src="./models/Caminhao.js" defer></script>
+    <script src="./models/VeiculoInimigo.js" defer></script>
+    <script src="./models/Coletavel.js" defer></script>
+    <script src="./models/LinhaEstrada.js" defer></script>
+    
+    <!-- TERCEIRO: Arquivo principal -->
+    <script src="./index.js" defer></script>
+    
+    <title>Caminhão Express</title>
+</head>
+
+<body>
+    <div class="game-header">
+        <div class="stats">
+            <span>💰 Dinheiro: <span id="dinheiro">R$ 1.500</span></span>
+            <span>📦 Carga: <span id="carga">100%</span></span>
+            <span>🎯 Fase: <span id="fase">1/3</span></span>
+        </div>
+        <div class="carga-info">
+            <span id="cargaNome">Caixas de Madeira</span>
+            <span id="cargaValor">R$ 1.000</span>
+        </div>
+    </div>
+    
+    <canvas id="des" width="500" height="700"></canvas>
+    
+    <footer>
+        <h2>Caminhão Express - Desafio das Entregas</h2>
+    </footer>
+</body>
+
+</html>
