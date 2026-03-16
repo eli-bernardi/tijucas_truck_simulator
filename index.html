@@ -5,19 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    
-    <!-- PRIMEIRO: Classe base (OBRIGATÓRIO) -->
     <script src="./models/Obj.js" defer></script>
-    
-    <!-- SEGUNDO: Classes que dependem de Obj -->
+    <script src="./models/Cenario.js" defer></script>
+    <script src="./models/LinhaEstrada.js" defer></script>
     <script src="./models/Caminhao.js" defer></script>
     <script src="./models/VeiculoInimigo.js" defer></script>
     <script src="./models/Coletavel.js" defer></script>
-    <script src="./models/LinhaEstrada.js" defer></script>
-    
-    <!-- TERCEIRO: Arquivo principal -->
     <script src="./index.js" defer></script>
-    
+
     <title>Caminhão Express</title>
 </head>
 
@@ -33,9 +28,9 @@
             <span id="cargaValor">R$ 1.000</span>
         </div>
     </div>
-    
+
     <canvas id="des" width="500" height="700"></canvas>
-    
+
     <footer>
         <h2>Caminhão Express - Desafio das Entregas</h2>
     </footer>

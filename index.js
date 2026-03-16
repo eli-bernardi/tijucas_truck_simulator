@@ -1,120 +1,111 @@
-let des = document.getElementById('des').getContext('2d');
+let des = document.getElementById('des').getContext('2d')
 
-// ============ CRIAÇÃO DOS OBJETOS COM IMAGENS ============
-let caminhao = new Caminhao(230, 550, 60, 80, './assets/images/caminhao.png');
+// ============ ÁUDIO ============
+// let motor = new Audio('./assets/audio/motor.wav')
+// let batida = new Audio('./assets/audio/batida.mp3')
+// motor.volume = 0.3
+// motor.loop = true
+// batida.volume = 0.5
 
-// Criar linhas da estrada (continuam sendo desenhadas, não imagens)
-let linhasEstrada = [];
-for (let i = 0; i < 5; i++) {
-      linhasEstrada.push(new LinhaEstrada(245, i * 150 - 100, 10, 40, '#ffffff'));
+// ============ CRIAÇÃO DOS OBJETOS ============
+let cenario = new Cenario()
+cenario.criarLinhas()
+let caminhao = new Caminhao(230, 550, 60, 80, './assets/images/caminhao-113.png')
+
+let inimigo1 = new VeiculoInimigo(130, -50, 50, './assets/images/moto-vermelha.png')
+let inimigo2 = new VeiculoInimigo(260, -120, 55, 75, './assets/images/moto-vermelha.png')
+let inimigo3 = new VeiculoInimigo(390, -200, 70, 90, './assets/images/moto-vermelha.png')
+let coletaveis = []
+let fase = 1
+let cargaNome = 'Caixas de Madeira'
+let cargaValor = 1000
+let jogar = true
+
+// ============ TEXTOS ============
+class Text {
+      des_text(texto, x, y, cor, fonte) {
+            des.fillStyle = cor
+            des.font = fonte
+            des.fillText(texto, x, y)
+      }
 }
 
-const colunas = [60, 130, 200, 270, 340, 410];
-
-// Veículos inimigos com imagens
-let inimigos = [
-      new VeiculoInimigo(colunas[0], -50, 50, 70, './assets/images/carro-pequeno.png', 4.2, 'carroPequeno'),
-      new VeiculoInimigo(colunas[1], -120, 55, 75, './assets/images/carro-grande.png', 5.1, 'carroGrande'),
-      new VeiculoInimigo(colunas[2], -200, 70, 90, './assets/images/caminhao-inimigo.png', 3.8, 'caminhao'),
-      new VeiculoInimigo(colunas[3], -80, 40, 60, './assets/images/moto.png', 6.0, 'moto'),
-      new VeiculoInimigo(colunas[4], -150, 50, 70, './assets/images/carro-pequeno.png', 4.5, 'carroPequeno'),
-      new VeiculoInimigo(colunas[5], -250, 55, 75, './assets/images/carro-grande.png', 5.5, 'carroGrande'),
-      new VeiculoInimigo(colunas[0], -350, 70, 90, './assets/images/caminhao-inimigo.png', 4.8, 'caminhao'),
-      new VeiculoInimigo(colunas[1], -420, 40, 60, './assets/images/moto.png', 5.2, 'moto'),
-      new VeiculoInimigo(colunas[2], -500, 50, 70, './assets/images/carro-pequeno.png', 6.3, 'carroPequeno'),
-      new VeiculoInimigo(colunas[3], -580, 55, 75, './assets/images/carro-grande.png', 4.0, 'carroGrande'),
-      new VeiculoInimigo(colunas[4], -650, 70, 90, './assets/images/caminhao-inimigo.png', 5.7, 'caminhao'),
-      new VeiculoInimigo(colunas[5], -720, 40, 60, './assets/images/moto.png', 4.3, 'moto')
-];
-
-let coletaveis = [];
-let fase = 1;
-let cargaNome = 'Caixas de Madeira';
-let cargaValor = 1000;
+let t1 = new Text() // Pontos/Dinheiro
+let t2 = new Text() // Vida/Carga
+let fase_txt = new Text() // Fase
 
 // ============ CONTROLES ============
 document.addEventListener('keydown', (e) => {
-      if (e.key === 'w' || e.key === 'ArrowUp') {
-            caminhao.pos = -5;
-      } else if (e.key === 's' || e.key === 'ArrowDown') {
-            caminhao.pos = 5;
-      } else if (e.key === 'a' || e.key === 'ArrowLeft') {
-            caminhao.dir = -5;
-      } else if (e.key === 'd' || e.key === 'ArrowRight') {
-            caminhao.dir = 5;
+      if (jogar) {
+            // motor.play()
+
+            if (e.key === 'w' || e.key === 'ArrowUp') {
+                  caminhao.pos = -5
+            } else if (e.key === 's' || e.key === 'ArrowDown') {
+                  caminhao.pos = 5
+            } else if (e.key === 'a' || e.key === 'ArrowLeft') {
+                  caminhao.dir = -5
+            } else if (e.key === 'd' || e.key === 'ArrowRight') {
+                  caminhao.dir = 5
+            }
       }
-});
+})
 
 document.addEventListener('keyup', (e) => {
       if (e.key === 'w' || e.key === 'ArrowUp' || e.key === 's' || e.key === 'ArrowDown') {
-            caminhao.pos = 0;
+            caminhao.pos = 0
       }
       if (e.key === 'a' || e.key === 'ArrowLeft' || e.key === 'd' || e.key === 'ArrowRight') {
-            caminhao.dir = 0;
+            caminhao.dir = 0
       }
-});
+})
 
 // ============ FUNÇÕES ============
-function desenhaCenario() {
-      // Céu
-      des.fillStyle = '#87CEEB';
-      des.fillRect(0, 0, 500, 700);
-
-      // Estrada
-      des.fillStyle = '#2c3e50';
-      des.fillRect(0, 0, 500, 700);
-
-      // Faixas laterais
-      des.strokeStyle = '#ecf0f1';
-      des.lineWidth = 3;
-      des.beginPath();
-      des.moveTo(30, 0);
-      des.lineTo(30, 700);
-      des.stroke();
-      des.beginPath();
-      des.moveTo(470, 0);
-      des.lineTo(470, 700);
-      des.stroke();
-
-      // Linhas da estrada
-      linhasEstrada.forEach(linha => linha.des_ret());
-
-      // Linha de chegada
-      des.strokeStyle = '#f1c40f';
-      des.lineWidth = 5;
-      des.beginPath();
-      des.moveTo(0, 100);
-      des.lineTo(500, 100);
-      des.stroke();
-
-      des.fillStyle = '#f1c40f';
-      des.font = 'bold 16px Arial';
-      des.textAlign = 'center';
-      des.fillText('🚩 ENTREGA', 250, 90);
-}
-
 function spawnarColetavel() {
-      if (Math.random() < 0.005) {
-            let coluna = colunas[Math.floor(Math.random() * colunas.length)];
-            let tipo = Math.random() < 0.7 ? 'dinheiro' : 'cargaExtra';
-            let imagem = tipo === 'dinheiro' ? './assets/images/dinheiro.png' : './assets/images/carga-extra.png';
-            let coletavel = new Coletavel(coluna, -30, 30, 30, imagem, tipo);
-            coletaveis.push(coletavel);
+      if (Math.random() < 0.005 && jogar) {
+            let x = Math.random() * 400 + 50 // Posição X aleatória
+            let tipo = Math.random() < 0.7 ? 'dinheiro' : 'cargaExtra'
+            let imagem = tipo === 'dinheiro' ? './assets/images/dinheiro.png' : './assets/images/carga-extra.png'
+            let coletavel = new Coletavel(x, -30, 30, 30, imagem, tipo)
+            coletaveis.push(coletavel)
       }
 }
 
-function verificarColisoes() {
-      inimigos.forEach(inimigo => {
-            if (caminhao.x < inimigo.x + inimigo.w &&
-                  caminhao.x + caminhao.w > inimigo.x &&
-                  caminhao.y < inimigo.y + inimigo.h &&
-                  caminhao.y + caminhao.h > inimigo.y) {
+function colisao() {
+      // Verifica colisão com inimigo1
+      if (caminhao.x < inimigo1.x + inimigo1.w &&
+            caminhao.x + caminhao.w > inimigo1.x &&
+            caminhao.y < inimigo1.y + inimigo1.h &&
+            caminhao.y + caminhao.h > inimigo1.y) {
 
-                  caminhao.sofrerDano(inimigo.getDano(), inimigo.getMulta());
-                  inimigo.y = -100;
-            }
-      });
+            batida.play()
+            caminhao.sofrerDano(inimigo1.getDano(), inimigo1.getMulta())
+            inimigo1.y = -100
+      }
 
+      // Verifica colisão com inimigo2
+      if (caminhao.x < inimigo2.x + inimigo2.w &&
+            caminhao.x + caminhao.w > inimigo2.x &&
+            caminhao.y < inimigo2.y + inimigo2.h &&
+            caminhao.y + caminhao.h > inimigo2.y) {
+
+            batida.play()
+            caminhao.sofrerDano(inimigo2.getDano(), inimigo2.getMulta())
+            inimigo2.y = -100
+      }
+
+      // Verifica colisão com inimigo3
+      if (caminhao.x < inimigo3.x + inimigo3.w &&
+            caminhao.x + caminhao.w > inimigo3.x &&
+            caminhao.y < inimigo3.y + inimigo3.h &&
+            caminhao.y + caminhao.h > inimigo3.y) {
+
+            batida.play()
+            caminhao.sofrerDano(inimigo3.getDano(), inimigo3.getMulta())
+            inimigo3.y = -100
+      }
+
+      // Colisão com coletáveis
       coletaveis.forEach((coletavel, index) => {
             if (caminhao.x < coletavel.x + coletavel.w &&
                   caminhao.x + caminhao.w > coletavel.x &&
@@ -122,95 +113,149 @@ function verificarColisoes() {
                   caminhao.y + caminhao.h > coletavel.y) {
 
                   if (coletavel.tipo === 'dinheiro') {
-                        caminhao.coletarDinheiro(50);
+                        caminhao.coletarDinheiro(50)
                   } else {
-                        caminhao.recuperarCarga(20);
+                        caminhao.recuperarCarga(20)
                   }
-                  coletaveis.splice(index, 1);
+                  coletaveis.splice(index, 1)
             }
-      });
+      })
+}
+
+function pontuacao() {
+      // Sistema de pontos ao ultrapassar inimigos (igual ao segundo código)
+      if (inimigo1.y > 750) {
+            caminhao.dinheiro += 50
+            inimigo1.y = -100
+      }
+      if (inimigo2.y > 750) {
+            caminhao.dinheiro += 50
+            inimigo2.y = -100
+      }
+      if (inimigo3.y > 750) {
+            caminhao.dinheiro += 50
+            inimigo3.y = -100
+      }
 }
 
 function verificarEntrega() {
-      if (caminhao.y < 120) {
-            caminhao.dinheiro += cargaValor;
+      if (caminhao.y < 120 && jogar) {
+            caminhao.dinheiro += cargaValor
+            caminhao.entregas++
 
             if (fase < 3) {
-                  fase++;
-                  caminhao.fase = fase;
-                  caminhao.y = 550;
+                  fase++
+                  caminhao.fase = fase
+                  cenario.fase = fase
+                  caminhao.y = 550
 
+                  // Atualiza a carga
                   const cargas = {
                         1: { nome: 'Caixas de Madeira', valor: 1000 },
                         2: { nome: 'Contêiner Refrigerado', valor: 2500 },
                         3: { nome: 'Tanque Inflamável', valor: 5000 }
-                  };
-                  cargaNome = cargas[fase].nome;
-                  cargaValor = cargas[fase].valor;
+                  }
+                  cargaNome = cargas[fase].nome
+                  cargaValor = cargas[fase].valor
 
-                  inimigos.forEach(inimigo => {
-                        inimigo.velocidade += 1;
-                  });
+                  // Aumenta velocidade dos inimigos (igual ao ver_fase do segundo código)
+                  inimigo1.velocidade += 1
+                  inimigo2.velocidade += 1
+                  inimigo3.velocidade += 1
             } else {
-                  alert('🏆 PARABÉNS! Você completou todas as entregas! 🏆');
-                  reiniciarJogo();
+                  alert('🏆 PARABÉNS! Você completou todas as entregas! 🏆')
+                  reiniciarJogo()
             }
       }
 }
 
-function atualizarUI() {
-      document.getElementById('dinheiro').innerHTML = `R$ ${caminhao.dinheiro}`;
-      document.getElementById('carga').innerHTML = `${caminhao.carga}%`;
-      document.getElementById('fase').innerHTML = `${fase}/3`;
-      document.getElementById('cargaNome').innerHTML = cargaNome;
-      document.getElementById('cargaValor').innerHTML = `R$ ${cargaValor}`;
+function game_over() {
+      if (caminhao.carga <= 0 || caminhao.dinheiro <= 0) {
+            jogar = false
+            motor.pause()
+      }
 }
 
 function reiniciarJogo() {
-      caminhao = new Caminhao(230, 550, 60, 80, './assets/images/caminhao.png');
-      fase = 1;
-      cargaNome = 'Caixas de Madeira';
-      cargaValor = 1000;
-      coletaveis = [];
+      caminhao = new Caminhao(230, 550, 60, 80, './assets/images/caminhao.png')
+      fase = 1
+      cenario.resetar()
+      cargaNome = 'Caixas de Madeira'
+      cargaValor = 1000
+      coletaveis = []
+      jogar = true
+      motor.currentTime = 0
 
-      inimigos.forEach((inimigo, index) => {
-            inimigo.y = -100 - index * 50;
-            inimigo.velocidade = 3 + Math.random() * 4;
-      });
+      // Reinicia posições dos inimigos
+      inimigo1.y = -50
+      inimigo2.y = -120
+      inimigo3.y = -200
+
+      // Reinicia velocidades
+      inimigo1.velocidade = 3.0
+      inimigo2.velocidade = 3.5
+      inimigo3.velocidade = 2.8
 }
 
 // ============ LOOP PRINCIPAL ============
 function desenha() {
-      desenhaCenario();
-      inimigos.forEach(inimigo => inimigo.des_ret());
-      coletaveis.forEach(coletavel => coletavel.des_ret());
-      caminhao.des_ret();
+      if (jogar) {
+            cenario.desenhar()
+
+            // Desenha inimigos (individualmente, igual ao segundo código)
+            inimigo1.des_ret()
+            inimigo2.des_ret()
+            inimigo3.des_ret()
+
+            // Desenha coletáveis
+            coletaveis.forEach(coletavel => coletavel.des_ret())
+
+            // Desenha caminhão
+            caminhao.des_ret()
+
+            // Textos na tela (igual ao segundo código)
+            t1.des_text('💰 ' + caminhao.dinheiro, 350, 40, '#f1c40f', '20px Arial')
+            t2.des_text('📦 ' + caminhao.carga + '%', 350, 70, caminhao.getCorCarga(), '20px Arial')
+            fase_txt.des_text('FASE ' + fase + '/3', 40, 40, '#f1c40f', '24px Arial')
+            fase_txt.des_text(cargaNome, 40, 70, 'white', '16px Arial')
+      } else {
+            // Tela de GAME OVER (igual ao segundo código)
+            t1.des_text('GAME OVER', 250, 350, '#e94560', '48px Arial')
+            t2.des_text('Dinheiro Final: R$ ' + caminhao.dinheiro, 250, 400, 'white', '20px Arial')
+            fase_txt.des_text('Entregas: ' + caminhao.entregas, 250, 430, 'white', '20px Arial')
+            fase_txt.des_text('Pressione F5 para jogar novamente', 250, 500, '#888', '16px Arial')
+      }
 }
 
 function atualiza() {
-      caminhao.mov_car();
-      inimigos.forEach(inimigo => inimigo.mov_car());
-      linhasEstrada.forEach(linha => linha.mov_car());
-      coletaveis.forEach(coletavel => coletavel.mov_car());
-      coletaveis = coletaveis.filter(c => c.y < 700);
+      if (jogar) {
+            caminhao.mov_car()
 
-      spawnarColetavel();
-      verificarColisoes();
-      verificarEntrega();
+            // Move inimigos (individualmente, igual ao segundo código)
+            inimigo1.mov_car()
+            inimigo2.mov_car()
+            inimigo3.mov_car()
 
-      if (caminhao.dinheiro <= 0 || caminhao.carga <= 0) {
-            alert('💥 GAME OVER! 💥');
-            reiniciarJogo();
+            // Move linhas da estrada
+            cenario.atualizarLinhas()
+
+            // Move coletáveis
+            coletaveis.forEach(coletavel => coletavel.mov_car())
+            coletaveis = coletaveis.filter(c => c.y < 700)
+
+            spawnarColetavel()
+            colisao()
+            pontuacao()
+            verificarEntrega()
+            game_over()
       }
-
-      atualizarUI();
 }
 
 function main() {
-      des.clearRect(0, 0, 500, 700);
-      desenha();
-      atualiza();
-      requestAnimationFrame(main);
+      des.clearRect(0, 0, 500, 700)
+      desenha()
+      atualiza()
+      requestAnimationFrame(main)
 }
 
-main();
+main()

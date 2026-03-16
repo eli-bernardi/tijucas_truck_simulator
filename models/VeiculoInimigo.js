@@ -1,37 +1,34 @@
 class VeiculoInimigo extends Obj {
-    constructor(x, y, w, h, a, velocidade, tipo) {
-        super(x, y, w, h, a); // 'a' agora é o caminho da imagem
-        this.velocidade = velocidade || 3 + Math.random() * 4;
+    constructor(x, y, w, h, a, tipo) {
+        super(x, y, w, h, a); // 'a' é o caminho da imagem
+        this.vel = 2; // Velocidade fixa
         this.tipo = tipo || 'carroPequeno';
     }
 
-    pos_x() {
-        const posicoesFixas = [60, 130, 200, 270, 340, 410];
-        return posicoesFixas[Math.floor(Math.random() * posicoesFixas.length)];
+    // Método para reiniciar posição no topo
+    recomeca() {
+        this.y = -100;
+        this.x = Math.floor(Math.random() * (460 - 60) + 60);
     }
 
-    // Não precisamos mais do des_ret personalizado, a classe Obj já desenha a imagem
-    // Mas podemos manter para adicionar informações extras
+    // Método de movimento (vertical)
+    mov_car() {
+        this.y += this.vel;
 
+        if (this.y > 750) {
+            this.recomeca();
+        }
+    }
+
+    // Desenha o veículo
     des_ret() {
-        // Desenha a imagem do veículo
-        super.des_ret();
+        super.des_ret(); // Desenha a imagem
 
-        // Opcional: desenhar o tipo do veículo como texto
+        // Opcional: mostrar o tipo
         des.fillStyle = 'white';
         des.font = '10px Arial';
         des.textAlign = 'center';
         des.fillText(this.tipo, this.x + this.w / 2, this.y - 5);
-    }
-
-    mov_car() {
-        this.y += this.velocidade;
-
-        if (this.y > 750) {
-            this.y = -100 - Math.random() * 200;
-            this.x = this.pos_x();
-            this.velocidade = 3 + Math.random() * 5;
-        }
     }
 
     getMulta() {
