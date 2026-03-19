@@ -4,7 +4,7 @@
 <head>
     <meta charset=" UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" href="./assets/images/fav_game.png" type="image/x-icon">
+<link rel="shortcut icon" href="../assets/images/fav_game.png" type="image/x-icon">
 <link rel="stylesheet" href="../assets/css/manual.css">
 <script src="./models/Obj.js" defer></script>
 <script src="./models/Cenario.js" defer></script>
@@ -22,19 +22,30 @@
 </header>
 
 <body>
-    <div class="game-header">
-        <div class="stats">
-            <span>💰 Dinheiro: <span id="dinheiro">R$ 1.500</span></span>
-            <span>📦 Carga: <span id="carga">100%</span></span>
-            <span>🎯 Fase: <span id="fase">1/3</span></span>
-        </div>
-        <div class="carga-info">
-            <span id="cargaNome">Caixas de Madeira</span>
-            <span id="cargaValor">R$ 1.000</span>
-        </div>
-    </div>
+    <main>
+        <section>
+            Seja bem-vindo ao manual do Tijucas Truck Simulator! Este guia irá ajudá-lo a entender os controles,
+            objetivos e dicas para aproveitar ao máximo sua experiência de jogo. Prepare-se para uma aventura
+            emocionante nas estradas de Tijucas!
+        </section><br>
+        <section>
+            O jogo é simples. Utilize os comandos para controlar o caminhão e desviar dos obstáculos.
+            O objetivo do jogo é levar a carga até o fim do trajeto, coletando itens pelo caminho para
+            aumentar sua pontuação.
+        </section>
+        <br>
+        <section>
+            Controles:
+            <ul>
+                <li>Seta para direita: Acelerar</li>
+                <li>Seta para esquerda: Frear</li>
+                <li>Seta para cima: Desviar para cima</li>
+                <li>Seta para baixo: Desviar para baixo</li>
+            </ul>
+        </section>
+    </main>
 
-    <canvas id="des" width="500" height="700"></canvas>
+    <canvas id="des" width="1800" height="700"></canvas>
 
     <footer>
         <h2>Tijucas Truck Simulator</h2>

@@ -42,11 +42,6 @@ a {
     text-align: center;
 }
 
-@font-face {
-    font-family: 'BlackWidow';
-    src: url('../images/BlackWidow.ttf') format('truetype');
-}
-
 .botao-jogo {
     font-family: 'BlackWidow', sans-serif;
     font-size: 24px;
@@ -76,4 +71,14 @@ footer p {
     font-size: 18px;
     font-family: 'Arial Black', sans-serif;
     font-style: italic;
+}
+
+@font-face {
+    font-family: 'BlackWidow';
+    src: url('../font/BlackWidow.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OverPass';
+    src: url('../font/overpass-extrabold.ttf') format('truetype');
 }
