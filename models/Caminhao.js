@@ -10,10 +10,8 @@ class Caminhao extends Obj {
       }
 
       des_ret() {
-            // Desenha a imagem do caminhão
             super.des_ret()
 
-            // UI em cima da imagem (sempre desenha, independente da imagem)
             this.desenharBarraCarga()
             this.desenharTexto()
       }

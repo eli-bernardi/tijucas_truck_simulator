@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('../images/logo_game.png') no-repeat center center fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+section {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 50px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    height: 50px;
+    width: 300px;
+    color: #FF0000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 36px;
+    background: transparent;
+    font-family: 'BlackWidow';
+    text-decoration: dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@font-face {
+    font-family: 'BlackWidow';
+    src: url('../images/BlackWidow.ttf') format('truetype');
+}
+
+.botao-jogo {
+    font-family: 'BlackWidow', sans-serif;
+    font-size: 24px;
+    color: #FF0000;
+}
+
+footer {
+    background: transparent;
+    color: white;
+    padding: 10px;
+    width: 500px;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+}
+
+footer h2 {
+    font-family: 'BlackWidow';
+    font-size: 24px;
+}
+
+footer p {
+    color: #FF0000;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Arial Black', sans-serif;
+    font-style: italic;
+}
