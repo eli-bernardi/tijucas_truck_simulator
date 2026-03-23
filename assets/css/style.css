@@ -77,6 +77,15 @@ section {
     align-items: center;
     color: antiquewhite;
     font-family: 'Overpass';
+    position: relative;
+    z-index: 1;
+}
+
+canvas#fundo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 section h1 {
