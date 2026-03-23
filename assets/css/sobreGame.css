@@ -13,6 +13,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
+    padding: 60px;
 }
 
 canvas {
@@ -24,6 +25,49 @@ canvas {
     z-index: 1;
 }
 
+Header {
+    background: transparent;
+    color: rgb(255, 255, 255);
+    padding: 15px 30px;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    color: #ffffff;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
 section {
     background: rgba(0, 0, 0, 0.7);
     padding: 20px;
@@ -32,6 +76,11 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+section p {
+    color: #FFFFFF;
+    font-family: 'OverPass', sans-serif;
 }
 
 a {
@@ -52,9 +101,13 @@ a {
     text-align: center;
 }
 
-@font-face {
-    font-family: 'BlackWidow';
-    src: url('../images/BlackWidow.ttf') format('truetype');
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .botao-jogo {
@@ -62,6 +115,7 @@ a {
     font-size: 24px;
     color: #FF0000;
 }
+
 
 footer {
     position: fixed;
@@ -86,4 +140,89 @@ footer a {
 footer a:hover {
     color: #CC0000;
     text-decoration: underline;
+}
+
+@font-face {
+    font-family: 'BlackWidow';
+    src: url('../font/BlackWidow.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OverPass';
+    src: url('../font/overpass-extrabold.ttf') format('truetype');
+}
+
+.scale-in-ver-top {
+    -webkit-animation: scale-in-ver-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: scale-in-ver-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes scale-in-ver-top {
+    0% {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in-ver-top {
+    0% {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        opacity: 1;
+    }
+}
+
+
+.scale-in-center {
+    -webkit-animation: scale-in-center 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: scale-in-center 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
 }
