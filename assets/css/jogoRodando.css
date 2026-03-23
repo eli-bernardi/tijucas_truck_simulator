@@ -6,6 +6,7 @@
 
 body {
     background: url('../images/logo_game.png') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,9 +35,17 @@ body {
     font-weight: bold;
 }
 
-#dinheiro { color: #4caf50; }
-#carga { color: #ff6b6b; }
-#fase { color: #f1c40f; }
+#dinheiro {
+    color: #4caf50;
+}
+
+#carga {
+    color: #ff6b6b;
+}
+
+#fase {
+    color: #f1c40f;
+}
 
 .carga-info {
     background: #1a1a2e;
@@ -44,8 +53,14 @@ body {
     border-radius: 20px;
 }
 
-#cargaNome { color: #ff6b6b; margin-right: 10px; }
-#cargaValor { color: #4caf50; }
+#cargaNome {
+    color: #ff6b6b;
+    margin-right: 10px;
+}
+
+#cargaValor {
+    color: #4caf50;
+}
 
 canvas {
     border: 3px solid #e94560;
@@ -54,12 +69,28 @@ canvas {
 }
 
 footer {
-    background: #0f3460;
-    color: white;
-    padding: 10px;
-    width: 500px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
-    border-radius: 0 0 10px 10px;
+    padding: 15px 0;
+    color: white;
+}
+
+footer a {
+    color: #FF0000;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Arial Black', sans-serif;
+    font-style: italic;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: #CC0000;
+    text-decoration: underline;
 }
 
 /* Modal Game Over */
@@ -69,7 +100,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
