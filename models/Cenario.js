@@ -1,95 +1,65 @@
 class Cenario {
     constructor() {
         this.fase = 1
-        this.velocidadeBase = 4
-        this.linhasEstrada = []
-    }
-    criarLinhas() {
-        this.linhasEstrada = [];
-        for (let i = 0; i < 5; i++) {
-            this.linhasEstrada.push(new LinhaEstrada(245, i * 150 - 100, 10, 40, '#ffffff'));
+        this.offset = 0
+        this.vel = 3
+
+        // Uma imagem por fase
+        this.fundos = {
+            1: this._carregarImg('../assets/images/fase1.png'),
+            2: this._carregarImg('../assets/images/fase2_ceu.png'),
+            3: this._carregarImg('../assets/images/fase3_ceu.png'),
         }
+    }
+
+    _carregarImg(src) {
+        const img = new Image()
+        img.src = src
+        return img
+    }
+
+    _desenharCamada(img, offset, y, h) {
+        if (!img.complete || img.naturalWidth === 0) return
+        const w = img.naturalWidth
+        const ox = ((offset % w) + w) % w
+        des.drawImage(img, -ox, y, w, h)
+        des.drawImage(img, -ox + w, y, w, h)
     }
 
     desenhar() {
+        // Fundo único rolando
+        this._desenharCamada(this.fundos[this.fase], this.offset, 0, 500)
 
-        // Estrada
-        des.fillStyle = '#2c3e50';
-        des.fillRect(0, 0, 500, 700);
 
-        // Faixas laterais
-        des.strokeStyle = '#ecf0f1';
-        des.lineWidth = 3;
-        des.beginPath();
-        des.moveTo(30, 0);
-        des.lineTo(30, 700);
-        des.stroke();
-        des.beginPath();
-        des.moveTo(470, 0);
-        des.lineTo(470, 700);
-        des.stroke();
+        // Linha de entrega
+        des.strokeStyle = '#f1c40f'
+        des.lineWidth = 5
+        des.setLineDash([10, 6])
+        des.beginPath()
+        des.moveTo(600, 360)
+        des.lineTo(600, 460)
+        des.stroke()
+        des.setLineDash([])
 
-        // Linhas da estrada (efeito de movimento)
-        this.linhasEstrada.forEach(linha => linha.des_ret());
-
-        // Linha de chegada
-        des.strokeStyle = '#f1c40f';
-        des.lineWidth = 5;
-        des.beginPath();
-        des.moveTo(0, 100);
-        des.lineTo(500, 100);
-        des.stroke();
-
-        // Placa de "ENTREGA"
-        des.fillStyle = '#f1c40f';
-        des.font = 'bold 16px Arial';
-        des.textAlign = 'center';
-        des.fillText('🚩 ENTREGA', 250, 90);
-
-        // Nome da fase
-        des.fillStyle = 'rgba(255, 255, 255, 0.3)';
-        des.font = '30px Arial';
-        des.textAlign = 'center';
-        des.fillText(this.getNomeFase(), 250, 350);
+        // Placa de esdwsntrega
+        des.fillStyle = 'rgba(0,0,0,0.55)'
+        des.fillRect(608, 355, 84, 28)
+        des.fillStyle = '#f1c40f'
+        des.font = 'bold 13px Arial'
+        des.textAlign = 'center'
+        des.fillText('🚩 ENTREGA', 650, 374)
     }
 
-    // Método para atualizar as linhas da estrada
     atualizarLinhas() {
-        this.linhasEstrada.forEach(linha => linha.mov_car());
+        this.offset += this.vel
     }
 
-    // Método para obter o nome da fase
     getNomeFase() {
-        const nomes = {
-            1: 'CIDADE',
-            2: 'ESTRADA',
-            3: 'SERRA'
-        };
-        return nomes[this.fase] || '';
+        return { 1: 'CIDADE NOTURNA', 2: 'FLORESTA', 3: 'SERRA' }[this.fase] || ''
     }
 
-    // Método para obter a velocidade da fase
-    getVelocidade() {
-        const velocidades = {
-            1: 4,
-            2: 6,
-            3: 8
-        };
-        return velocidades[this.fase] || 4;
-    }
-
-    // Método para avançar de fase
-    avancarFase() {
-        if (this.fase < 3) {
-            this.fase++;
-            return true;
-        }
-        return false;
-    }
-
-    // Método para resetar o cenário
     resetar() {
-        this.fase = 1;
-        this.criarLinhas(); // Recria as linhas
+        this.fase = 1
+        this.offset = 0
     }
 }
