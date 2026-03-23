@@ -6,12 +6,22 @@
 
 body {
     background: url('../images/logo_game.png') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 section {
@@ -54,26 +64,26 @@ a {
 }
 
 footer {
-    background: transparent;
-    color: white;
-    padding: 10px;
-    width: 500px;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    z-index: 2;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 15px 0;
+    color: white;
 }
 
-footer h2 {
-    font-family: 'BlackWidow';
-    font-size: 24px;
-}
-
-footer p {
+footer a {
     color: #FF0000;
     text-decoration: none;
     font-size: 18px;
     font-family: 'Arial Black', sans-serif;
     font-style: italic;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: #CC0000;
+    text-decoration: underline;
 }
