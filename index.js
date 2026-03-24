@@ -6,18 +6,18 @@ let cenario = new Cenario()
 let caminhao = new Caminhao(80, 210, 240, 60, '../assets/images/caminhao_madeira.png')
 
 let inimigos = [
-      new VeiculoInimigo(750, 130, 75, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(870, 260, 75, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1000, 380, 90, 55, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1130, 210, 80, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1390, 130, 90, 55, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1520, 260, 80, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1650, 380, 75, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1780, 210, 90, 55, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(1910, 340, 80, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(2040, 130, 75, 50, '../assets/images/moto-vermelha.png'),
-      new VeiculoInimigo(2170, 260, 90, 55, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(750, 130, 75, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(870, 260, 75, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1000, 380, 90, 55, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1130, 210, 80, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1390, 130, 90, 55, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1520, 260, 80, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1650, 380, 75, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1780, 210, 90, 55, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(1910, 340, 80, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(2040, 130, 75, 50, '../assets/images/moto-vermelha.png'),
+      // new VeiculoInimigo(2170, 260, 90, 55, '../assets/images/moto-vermelha.png'),
 ]
 
 const velocidadesBase = [3.0, 3.5, 2.8, 3.2, 3.6, 2.9, 3.3, 3.7, 2.7, 3.4, 3.8, 2.6]
@@ -28,6 +28,7 @@ let cargaNome = 'Caixas de Madeira'
 let cargaValor = 1000
 let jogar = true
 
+
 // ============ TEXTOS ============
 class Text {
       des_text(texto, x, y, cor, fonte) {
@@ -36,9 +37,56 @@ class Text {
             des.fillText(texto, x, y)
       }
 }
+
 let t1 = new Text()
 let t2 = new Text()
 let fase_txt = new Text()
+
+
+// =============  ÁUDIO  =============
+const sons = {
+      batida: new Audio('../assets/sounds/crash-car.mp3'),
+      coleta: new Audio('../assets/sounds/collect-item.mp3'),
+      entrega: new Audio('../assets/sounds/mission-complete.mp3'),
+      motor: new Audio('../assets/sounds/motor-engine.mp3'),
+      gameOver: new Audio('../assets/sounds/game-over.mp3'),
+      mouseClique: new Audio('../assets/sounds/mouse-click.mp3'),
+}
+
+const musicaTema = {
+      sonho_caminhoneiro: new Audio('../assets/music/sonho_caminhoneiro_karaoke.mp3'),
+      sublime_renuncia: new Audio('../assets/music/sublime_renuncia_karaoke.mp3'),
+      convite_casamento: new Audio('../assets/music/convite_casamento_karaoke.mp3'),
+}
+
+musicaTema.loop = true
+musicaTema.volume = 0.3
+
+
+const musicaAleatorias = {
+      1: new Audio('../assets/music/flores_vida.mp3'),
+      // 2: new Audio('../assets/music/nos_bracos_teus.mp3'),
+      3: new Audio('../assets/music/por_voce_que_canto.mp3'),
+      4: new Audio('../assets/music/voce_nn_sabe_amar.mp3'),
+}
+
+let musicaAtual = null
+
+function tocarMusicaAleatorio() {
+      if (musicaAtual) {
+            musicaAtual.pause()
+            musicaAtual.currentTime = 0
+      }
+      const idx = Math.floor(Math.random() * musicaAleatorias.length)
+      musicaAtual = musicaAleatorias[idx]
+      musicaAtual.play()
+      musicaAtual.loop = true
+      musicaAtual.volume = 0.4
+}
+
+document.addEventListener('click', () => {
+      sons.mouseClique.play()
+})
 
 // ============ CONTROLES ============
 document.addEventListener('keydown', (e) => {
@@ -52,6 +100,7 @@ document.addEventListener('keyup', (e) => {
       if (e.key === 'w' || e.key === 'ArrowUp' || e.key === 's' || e.key === 'ArrowDown') caminhao.pos = 0
       if (e.key === 'a' || e.key === 'ArrowLeft' || e.key === 'd' || e.key === 'ArrowRight') caminhao.dir = 0
 })
+
 
 // ============ FUNÇÕES ============
 function spawnarColetavel() {
@@ -71,6 +120,7 @@ function colisao() {
                   caminhao.y + caminhao.h > inimigo.y) {
                   caminhao.sofrerDano(inimigo.getDano(), inimigo.getMulta())
                   inimigo.x = 750
+                  sons.batida.play()
             }
       })
 
@@ -82,6 +132,7 @@ function colisao() {
                   if (coletavel.tipo === 'dinheiro') caminhao.coletarDinheiro(50)
                   else caminhao.recuperarCarga(20)
                   coletaveis.splice(i, 1)
+                  sons.coleta.play()
             }
       })
 }
@@ -90,16 +141,16 @@ function pontuacao() {
       inimigos.forEach(inimigo => {
             if (inimigo.x + inimigo.w < 0) {
                   caminhao.dinheiro += 50
-                  inimigo.x = 750
+                  inimigo.x = 2000
             }
       })
 }
 
 function verificarEntrega() {
-      if (caminhao.x + caminhao.w > 580 && jogar) {
+      if (caminhao.x + caminhao.w > 1550 && jogar) {
             caminhao.dinheiro += cargaValor
             caminhao.entregas++
-
+            sons.entrega.play()
             if (fase < 3) {
                   fase++
                   caminhao.fase = fase
@@ -124,6 +175,12 @@ function verificarEntrega() {
 
 function game_over() {
       if (caminhao.carga <= 0 || caminhao.dinheiro <= 0) jogar = false
+      jogar = false
+      if (musicaAtual) {
+            musicaAtual.pause()
+            musicaAtual.currentTime = 0
+      }
+      sons.gameOver.play()
 }
 
 function reiniciarJogo() {
@@ -134,12 +191,14 @@ function reiniciarJogo() {
       coletaveis = []
       jogar = true
       cenario.resetar()
+      tocarMusicaAleatorio()
 
       inimigos.forEach((inimigo, i) => {
             inimigo.x = 750 + i * 130
             inimigo.velocidade = velocidadesBase[i]
       })
 }
+
 
 // ============ LOOP ============
 function desenha() {
@@ -149,10 +208,11 @@ function desenha() {
             coletaveis.forEach(c => c.des_ret())
             caminhao.des_ret()
 
-            t1.des_text('💰 ' + caminhao.dinheiro, 560, 30, '#f1c40f', '20px Arial')
-            t2.des_text('📦 ' + caminhao.carga + '%', 560, 55, caminhao.getCorCarga(), '20px Arial')
-            fase_txt.des_text('FASE ' + fase + '/3', 20, 30, '#f1c40f', '24px Arial')
-            fase_txt.des_text(cargaNome, 20, 55, 'white', '16px Arial')
+            document.getElementById('dinheiro').textContent = 'R$ ' + caminhao.dinheiro
+            document.getElementById('carga').textContent = caminhao.carga + '%'
+            document.getElementById('fase').textContent = fase + '/3'
+            document.getElementById('cargaNome').textContent = cargaNome
+            document.getElementById('cargaValor').textContent = 'R$ ' + cargaValor
       } else {
             t1.des_text('GAME OVER', 350, 220, '#e94560', '48px Arial')
             t2.des_text('Dinheiro Final: R$ ' + caminhao.dinheiro, 350, 270, 'white', '20px Arial')
@@ -175,7 +235,7 @@ function atualiza() {
 }
 
 function main() {
-      des.clearRect(0, 0,900, 500)
+      des.clearRect(0, 0, 1600, 600)
       desenha()
       atualiza()
       requestAnimationFrame(main)
