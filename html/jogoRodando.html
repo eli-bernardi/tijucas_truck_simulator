@@ -3,20 +3,28 @@
 
 <head>
     <meta charset=" UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" href="../assets/images/fav_game.png" type="image/x-icon">
-<link rel="stylesheet" href="../assets/css/jogoRodando.css">
-<script src="../models/Obj.js" defer></script>
-<script src="../models/Cenario.js" defer></script>
-<script src="../models/LinhaEstrada.js" defer></script>
-<script src="../models/Caminhao.js" defer></script>
-<script src="../models/VeiculoInimigo.js" defer></script>
-<script src="../models/Coletavel.js" defer></script>
-<script src="../index.js" defer></script>
-<title>Tijucas Truck Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/images/fav_game.png" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/css/jogoRodando.css">
+    <script src="../models/Obj.js" defer></script>
+    <script src="../models/Cenario.js" defer></script>
+    <script src="../models/Caminhao.js" defer></script>
+    <script src="../models/VeiculoInimigo.js" defer></script>
+    <script src="../models/Coletavel.js" defer></script>
+    <script src="../index.js" defer></script>
+    <title>Tijucas Truck Simulator</title>
 </head>
 
 <body>
+    <header class="scale-in-ver-top">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="./sobreGame.html">Sobre o Jogo</a></li>
+                <li><a href="./manual.html">Manual</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="game-header">
         <div class="stats">
             <span>💰 Dinheiro: <span id="dinheiro">R$ 1.500</span></span>
@@ -29,7 +37,7 @@
         </div>
     </div>
 
-    <canvas id="des" width="900" height="500"></canvas>
+    <canvas id="des" width="1600" height="600"></canvas>
 
     <footer>
         <a href="https://github.com/eli-bernardi"> Eliel Bernardi ©</a>
