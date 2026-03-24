@@ -7,8 +7,8 @@ class Cenario {
         // Uma imagem por fase
         this.fundos = {
             1: this._carregarImg('../assets/images/fase1.png'),
-            2: this._carregarImg('../assets/images/fase2_ceu.png'),
-            3: this._carregarImg('../assets/images/fase3_ceu.png'),
+            2: this._carregarImg('../assets/images/fase2.png'),
+            // 3: this._carregarImg('../assets/images/fase3_ceu.png'),
         }
     }
 
@@ -20,7 +20,7 @@ class Cenario {
 
     _desenharCamada(img, offset, y, h) {
         if (!img.complete || img.naturalWidth === 0) return
-        const w = img.naturalWidth
+        const w = 1600  // força a largura independente do tamanho real da imagem
         const ox = ((offset % w) + w) % w
         des.drawImage(img, -ox, y, w, h)
         des.drawImage(img, -ox + w, y, w, h)
@@ -28,7 +28,7 @@ class Cenario {
 
     desenhar() {
         // Fundo único rolando
-        this._desenharCamada(this.fundos[this.fase], this.offset, 0, 500)
+        this._desenharCamada(this.fundos[this.fase], this.offset, 0, 500) // altura 500
 
 
         // Linha de entrega
@@ -36,18 +36,19 @@ class Cenario {
         des.lineWidth = 5
         des.setLineDash([10, 6])
         des.beginPath()
-        des.moveTo(600, 360)
-        des.lineTo(600, 460)
+        des.moveTo(1500, 0)   // linha de entrega perto da borda direita
+        des.lineTo(1500, 500)
+
         des.stroke()
         des.setLineDash([])
 
-        // Placa de esdwsntrega
+        // Placa de entrega
         des.fillStyle = 'rgba(0,0,0,0.55)'
-        des.fillRect(608, 355, 84, 28)
+        des.fillRect(15000, 355, 84, 28)
         des.fillStyle = '#f1c40f'
         des.font = 'bold 13px Arial'
         des.textAlign = 'center'
-        des.fillText('🚩 ENTREGA', 650, 374)
+        des.fillText('🚩 ENTREGA', 1500, 300)
     }
 
     atualizarLinhas() {
