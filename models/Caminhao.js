@@ -7,6 +7,22 @@ class Caminhao extends Obj {
             this.carga = 100
             this.fase = 1
             this.entregas = 0
+
+            // Imagens por fase
+            this.imagensFase = {
+                  1: { src: '../assets/images/caminhao_madeira.png', w: 400, h: 120 },
+                  2: { src: '../assets/images/caminhao_bau.png', w: 400, h: 120 },
+                  3: { src: '../assets/images/1620_cacamba.png', w: 400, h: 120 },
+            }
+      }
+
+      trocarImagemFase(fase) {
+            const dados = this.imagensFase[fase]
+            this.w = dados.w
+            this.h = dados.h
+            this.img.src = dados.src
+            this.imgCarregada = false
+            this.img.onload = () => this.imgCarregada = true
       }
 
       getCorCarga() {
