@@ -8,7 +8,7 @@ class Cenario {
         this.fundos = {
             1: this._carregarImg('../assets/images/fase1.png'),
             2: this._carregarImg('../assets/images/fase2.png'),
-            // 3: this._carregarImg('../assets/images/fase3_ceu.png'),
+            3: this._carregarImg('../assets/images/fase3.png'),
         }
     }
 
