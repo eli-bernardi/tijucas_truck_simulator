@@ -108,7 +108,7 @@ function spawnarColetavel() {
             let y = Math.random() * 360 + 70
             let tipo = Math.random() < 0.7 ? 'dinheiro' : 'cargaExtra'
             let imagem = tipo === 'dinheiro' ? '../assets/images/dinheiro.png' : '../assets/images/carga-extra.png'
-            coletaveis.push(new Coletavel(730, y, 30, 30, imagem, tipo))
+            coletaveis.push(new Coletavel(730, y, 60, 60, imagem, tipo))
       }
 }
 
@@ -155,12 +155,13 @@ function verificarEntrega() {
                   fase++
                   caminhao.fase = fase
                   cenario.fase = fase
+                  caminhao.trocarImagemFase(fase)
                   caminhao.x = 80
 
                   const cargas = {
-                        1: { nome: 'Caixas de Madeira', valor: 1000 },
+                        1: { nome: 'Levando Madeira', valor: 1000 },
                         2: { nome: 'Contêiner Refrigerado', valor: 2500 },
-                        3: { nome: 'Tanque Inflamável', valor: 5000 }
+                        3: { nome: 'Carga de Areia', valor: 2000 }
                   }
                   cargaNome = cargas[fase].nome
                   cargaValor = cargas[fase].valor
@@ -174,17 +175,18 @@ function verificarEntrega() {
 }
 
 function game_over() {
-      if (caminhao.carga <= 0 || caminhao.dinheiro <= 0) jogar = false
-      jogar = false
-      if (musicaAtual) {
-            musicaAtual.pause()
-            musicaAtual.currentTime = 0
+      if (caminhao.carga <= 0 || caminhao.dinheiro <= 0) {
+            jogar = false
+            if (musicaAtual) {
+                  musicaAtual.pause()
+                  musicaAtual.currentTime = 0
+            }
+            sons.gameOver.play()
       }
-      sons.gameOver.play()
 }
 
 function reiniciarJogo() {
-      caminhao = new Caminhao(80, 210, 240, 60, '../assets/images/caminhao_madeira.png')
+      caminhao = new Caminhao(80, 240, 400 , 120, '../assets/images/caminhao_madeira.png')
       fase = 1
       cargaNome = 'Caixas de Madeira'
       cargaValor = 1000
