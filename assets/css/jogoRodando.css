@@ -5,7 +5,7 @@
 }
 
 body {
-    background: url('../images/logo_game.png') no-repeat center center fixed;
+    background: url('../images/game/logo_game.png') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -34,6 +34,7 @@ header {
     left: 0;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.5);
+    font-family: 'BlackWidow';
 }
 
 nav {
@@ -59,12 +60,15 @@ nav ul li a {
     font-weight: 500;
     transition: all 0.3s ease;
     display: inline-block;
+    font-family: 'BlackWidow';
+
 }
 
 nav ul li a:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
+
 .game-header {
     background: #0f3460;
     color: white;

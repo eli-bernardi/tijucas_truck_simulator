@@ -3,21 +3,21 @@ let des = document.getElementById('des').getContext('2d')
 // ============ OBJETOS ============
 let cenario = new Cenario()
 
-let caminhao = new Caminhao(80, 210, 240, 60, '../assets/images/caminhao_madeira.png')
+let caminhao = new Caminhao(80, 210, 240, 60, '../assets/images/veiculo/caminhao_madeira.png')
 
 let inimigos = [
-      // new VeiculoInimigo(750, 130, 75, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(870, 260, 75, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1000, 380, 90, 55, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1130, 210, 80, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1390, 130, 90, 55, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1520, 260, 80, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1650, 380, 75, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1780, 210, 90, 55, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(1910, 340, 80, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(2040, 130, 75, 50, '../assets/images/moto-vermelha.png'),
-      // new VeiculoInimigo(2170, 260, 90, 55, '../assets/images/moto-vermelha.png'),
+      new VeiculoInimigo(750, 130, 75, 50, '../assets/images/veiculo/f250.png'),
+      new VeiculoInimigo(870, 260, 75, 50, '../assets/images/veiculo/fusca.png'),
+      new VeiculoInimigo(1000, 380, 90, 55, '../assets/images/veiculo/chevette.png'),
+      // new VeiculoInimigo(1130, 210, 80, 50, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(1390, 130, 90, 55, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(1520, 260, 80, 50, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(1650, 380, 75, 50, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(1780, 210, 90, 55, '../assets/images/veiculo/.png'),
+      // // new VeiculoInimigo(1910, 340, 80, 50, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(2040, 130, 75, 50, '../assets/images/veiculo/.png'),
+      // new VeiculoInimigo(2170, 260, 90, 55, '../assets/images/veiculo/.png'),
 ]
 
 const velocidadesBase = [3.0, 3.5, 2.8, 3.2, 3.6, 2.9, 3.3, 3.7, 2.7, 3.4, 3.8, 2.6]
@@ -53,24 +53,42 @@ const sons = {
       mouseClique: new Audio('../assets/sounds/mouse-click.mp3'),
 }
 
-const musicaTema = {
-      sonho_caminhoneiro: new Audio('../assets/music/sonho_caminhoneiro_karaoke.mp3'),
-      sublime_renuncia: new Audio('../assets/music/sublime_renuncia_karaoke.mp3'),
-      convite_casamento: new Audio('../assets/music/convite_casamento_karaoke.mp3'),
-}
+const musicaTema = [
+      new Audio('../assets/music/sonho_caminhoneiro_karaoke.mp3'),
+      new Audio('../assets/music/sublime_renuncia_karaoke.mp3'),
+      new Audio('../assets/music/convite_casamento_karaoke.mp3'),
+]
 
-musicaTema.loop = true
-musicaTema.volume = 0.3
-
-
-const musicaAleatorias = {
-      1: new Audio('../assets/music/flores_vida.mp3'),
-      // 2: new Audio('../assets/music/nos_bracos_teus.mp3'),
-      3: new Audio('../assets/music/por_voce_que_canto.mp3'),
-      4: new Audio('../assets/music/voce_nn_sabe_amar.mp3'),
-}
+const musicaAleatorias = [
+      new Audio('../assets/music/flores_vida.mp3'),
+      new Audio('../assets/music/nos_braco_teus.mp3'),
+      new Audio('../assets/music/por_voce_que_canto.mp3'),
+      new Audio('../assets/music/voce_nn_sabe_amar.mp3'),
+]
 
 let musicaAtual = null
+let musicaTemaIndex = 0
+
+musicaTema.forEach(musica => {
+      musica.loop = true
+      musica.volume = 0.3
+})
+
+musicaAleatorias.forEach(musica => {
+      musica.loop = true
+      musica.volume = 0.3
+})
+
+function tocarMusicaTema() {
+      if (musicaAtual) {
+            musicaAtual.pause()
+            musicaAtual.currentTime = 0
+      }
+      musicaAtual = musicaTema[musicaTemaIndex]
+      musicaAtual.play()
+
+      musicaTemaIndex = (musicaTemaIndex + 1) % musicaTema.length
+}
 
 function tocarMusicaAleatorio() {
       if (musicaAtual) {
@@ -80,13 +98,37 @@ function tocarMusicaAleatorio() {
       const idx = Math.floor(Math.random() * musicaAleatorias.length)
       musicaAtual = musicaAleatorias[idx]
       musicaAtual.play()
-      musicaAtual.loop = true
-      musicaAtual.volume = 0.4
+}
+function pararMusica() {
+      if (musicaAtual) {
+            musicaAtual.pause()
+            musicaAtual.currentTime = 0
+            musicaAtual = null
+      }
 }
 
+function iniciarMusica() {
+      const isGamePage = window.location.pathname.includes('jogo') ||
+            document.getElementById('gameCanvas') !== null
+
+      if (isGamePage) {
+            tocarMusicaAleatorio()
+      } else {
+            tocarMusicaTema()
+      }
+}
 document.addEventListener('click', () => {
       sons.mouseClique.play()
+      if (!musicaAtual) {
+            iniciarMusica()
+      }
 })
+
+document.addEventListener('keydown', () => {
+      if (!musicaAtual) {
+            iniciarMusica()
+      }
+}, { once: true })
 
 // ============ CONTROLES ============
 document.addEventListener('keydown', (e) => {
@@ -107,8 +149,9 @@ function spawnarColetavel() {
       if (Math.random() < 0.005 && jogar) {
             let y = Math.random() * 360 + 70
             let tipo = Math.random() < 0.7 ? 'dinheiro' : 'cargaExtra'
-            let imagem = tipo === 'dinheiro' ? '../assets/images/dinheiro.png' : '../assets/images/carga-extra.png'
+            let imagem = tipo === 'dinheiro' ? '../assets/images/game/dinheiro.png' : '../assets/images/game/carga-extra.png'
             coletaveis.push(new Coletavel(730, y, 60, 60, imagem, tipo))
+            sons.coleta.play()
       }
 }
 
@@ -186,7 +229,7 @@ function game_over() {
 }
 
 function reiniciarJogo() {
-      caminhao = new Caminhao(80, 240, 400 , 120, '../assets/images/caminhao_madeira.png')
+      caminhao = new Caminhao(80, 240, 400, 120, '../assets/images/veiculo/caminhao_madeira.png')
       fase = 1
       cargaNome = 'Caixas de Madeira'
       cargaValor = 1000
@@ -216,9 +259,23 @@ function desenha() {
             document.getElementById('cargaNome').textContent = cargaNome
             document.getElementById('cargaValor').textContent = 'R$ ' + cargaValor
       } else {
-            t1.des_text('GAME OVER', 350, 220, '#e94560', '48px Arial')
-            t2.des_text('Dinheiro Final: R$ ' + caminhao.dinheiro, 350, 270, 'white', '20px Arial')
-            fase_txt.des_text('Pressione F5 para jogar novamente', 350, 320, '#888', '16px Arial')
+            // Fundo escuro
+            des.fillStyle = 'rgba(0, 0, 0, 0.85)'
+            des.fillRect(0, 0, 1200, 500)
+
+            // GAME OVER centralizado
+            des.textAlign = 'center'
+            des.fillStyle = '#e94560'
+            des.font = 'bold 64px Arial'
+            des.fillText('GAME OVER', 600, 180)
+
+            des.fillStyle = 'white'
+            des.font = '28px Arial'
+            des.fillText('Dinheiro Final: R$ ' + caminhao.dinheiro, 600, 260)
+
+            des.fillStyle = '#888'
+            des.font = '20px Arial'
+            des.fillText('Pressione F5 para jogar novamente', 600, 320)
       }
 }
 
@@ -237,9 +294,8 @@ function atualiza() {
 }
 
 function main() {
-      des.clearRect(0, 0, 1600, 600)
+      des.clearRect(0, 0, 1200, 500)
       desenha()
       atualiza()
       requestAnimationFrame(main)
 }
-main()

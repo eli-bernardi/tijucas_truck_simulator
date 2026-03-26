@@ -5,7 +5,7 @@
 }
 
 body {
-    background: url('../images/logo_game.png') no-repeat center center fixed;
+    background: url('../images/game/logo_game.png') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     flex-direction: column;

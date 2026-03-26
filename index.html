@@ -5,14 +5,11 @@
     <meta charset="UTF-8">
     <canvas id="fundo" width="900" height="500"></canvas>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/images/fav_game.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/fav_game.png" type="png">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="./models/Obj.js" defer></script>
-    <script src="./models/Cenario.js" defer></script>
-    <script src="./models/Caminhao.js" defer></script>
-    <script src="./models/VeiculoInimigo.js" defer></script>
-    <script src="./models/Coletavel.js" defer></script>
-    <script src="./index.js" defer></script>
+    <script src="./models/MusicaJogo.js"defer></script>
+    <script src="./models/MusicaTema.js"defer></script>
+    <script src="index.js" defer></script>
     <title>Tijucas Truck Simulator</title>
 </head>
 
@@ -24,6 +21,13 @@
             <a href="./html/manual.html"> Manual do Game</a>
         </section>
     </main>
+    <script>
+        // Quando a página carregar, configurar para tocar música tema
+        window.addEventListener('load', function () {
+            // Aguarda interação do usuário (já configurado nos event listeners)
+            console.log('Página inicial - música tema será tocada após clique');
+        });
+    </script>
     <footer>
         <a href="https://github.com/eli-bernardi"> Eliel Bernardi ©</a>
     </footer>
