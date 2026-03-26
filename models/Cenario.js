@@ -6,9 +6,9 @@ class Cenario {
 
         // Uma imagem por fase
         this.fundos = {
-            1: this._carregarImg('../assets/images/fase1.png'),
-            2: this._carregarImg('../assets/images/fase2.png'),
-            3: this._carregarImg('../assets/images/fase3.png'),
+            1: this._carregarImg('../assets/images/game/fase1.png'),
+            2: this._carregarImg('../assets/images/game/fase2.png'),
+            3: this._carregarImg('../assets/images/game/fase3.png'),
         }
     }
 
@@ -54,11 +54,6 @@ class Cenario {
     atualizarLinhas() {
         this.offset += this.vel
     }
-
-    getNomeFase() {
-        return { 1: 'CIDADE NOTURNA', 2: 'FLORESTA', 3: 'SERRA' }[this.fase] || ''
-    }
-
     resetar() {
         this.fase = 1
         this.offset = 0
