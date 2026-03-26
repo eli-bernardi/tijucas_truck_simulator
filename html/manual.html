@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/images/fav_game.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/manual.css">
+    <script src="../models/MusicaJogo.js"defer></script>
+    <script src="../models/MusicaTema.js"defer></script>
     <title>Tijucas Truck Simulator</title>
 </head>
 <header class="scale-in-ver-top">
@@ -41,7 +43,12 @@
             </ul>
         </section>
     </main>
-
+    <script>
+        // Também usa música tema
+        window.addEventListener('load', function () {
+            console.log('Como Jogar - música tema');
+        });
+    </script>   
     <canvas id="des" width="1800" height="700"></canvas>
 
     <footer>

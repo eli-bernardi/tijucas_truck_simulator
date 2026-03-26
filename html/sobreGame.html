@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/images/fav_game.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/sobreGame.css">
-    <title>Tijucas Truck Simulator</title>
+    <script src="../models/MusicaJogo.js"defer></script>
+    <script src="../models/MusicaTema.js"defer></script>
+     <title>Tijucas Truck Simulator</title>
 </head>
 <header class="scale-in-ver-top">
     <nav>
@@ -40,6 +42,12 @@
                 intenso e escutar um bom sertanejo enquanto se torna o melhor caminhoneiro de Tijucas!
             </p>
         </section>
+        <script>
+            // Similar à página inicial, usa música tema
+            window.addEventListener('load', function () {
+                console.log('Página Sobre - música tema');
+            });
+        </script>
         <canvas id="des" width="1800" height="700"></canvas>
         <footer>
             <a href="https://github.com/eli-bernardi"> Eliel Bernardi ©</a>
