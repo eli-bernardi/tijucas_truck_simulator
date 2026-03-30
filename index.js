@@ -6,21 +6,19 @@ let cenario = new Cenario()
 let caminhao = new Caminhao(80, 210, 240, 60, '../assets/images/veiculo/caminhao_madeira.png')
 
 let inimigos = [
-      new VeiculoInimigo(750, 130, 75, 50, '../assets/images/veiculo/f250.png'),
-      new VeiculoInimigo(870, 260, 75, 50, '../assets/images/veiculo/fusca.png'),
-      new VeiculoInimigo(1000, 380, 90, 55, '../assets/images/veiculo/chevette.png'),
-      // new VeiculoInimigo(1130, 210, 80, 50, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(1390, 130, 90, 55, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(1520, 260, 80, 50, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(1650, 380, 75, 50, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(1780, 210, 90, 55, '../assets/images/veiculo/.png'),
-      // // new VeiculoInimigo(1910, 340, 80, 50, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(2040, 130, 75, 50, '../assets/images/veiculo/.png'),
-      // new VeiculoInimigo(2170, 260, 90, 55, '../assets/images/veiculo/.png'),
+      new VeiculoInimigo(750, 130, 155, 52, '../assets/images/veiculo/f250.png'),
+      new VeiculoInimigo(870, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
+      // new VeiculoInimigo(1000, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
+      new VeiculoInimigo(1130, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
+      new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/veiculo/gs1250.png'),
+      // new VeiculoInimigo(1390, 130, 155, 52, '../assets/images/veiculo/f250.png'),
+      // new VeiculoInimigo(1520, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
+      new VeiculoInimigo(1650, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
+      // new VeiculoInimigo(1780, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
+      new VeiculoInimigo(1910, 340, 120, 60, '../assets/images/veiculo/uno_mille.png'),
 ]
 
-const velocidadesBase = [3.0, 3.5, 2.8, 3.2, 3.6, 2.9, 3.3, 3.7, 2.7, 3.4, 3.8, 2.6]
+const velocidadesBase = [3.0, 3.5, 2.8, 3.2, 3.6, 2.9, 3.3, 3.7, 2.7, 3.4]
 
 let coletaveis = []
 let fase = 1
@@ -41,6 +39,7 @@ class Text {
 let t1 = new Text()
 let t2 = new Text()
 let fase_txt = new Text()
+
 
 // ============ ÁUDIO ============
 const sons = {
@@ -229,3 +228,4 @@ function main() {
       atualiza()
       requestAnimationFrame(main)
 }
+main()
