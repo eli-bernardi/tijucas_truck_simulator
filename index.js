@@ -42,8 +42,7 @@ let t1 = new Text()
 let t2 = new Text()
 let fase_txt = new Text()
 
-
-// =============  ÁUDIO  =============
+// ============ ÁUDIO ============
 const sons = {
       batida: new Audio('../assets/sounds/crash-car.mp3'),
       coleta: new Audio('../assets/sounds/collect-item.mp3'),
@@ -53,82 +52,15 @@ const sons = {
       mouseClique: new Audio('../assets/sounds/mouse-click.mp3'),
 }
 
-const musicaTema = [
-      new Audio('../assets/music/sonho_caminhoneiro_karaoke.mp3'),
-      new Audio('../assets/music/sublime_renuncia_karaoke.mp3'),
-      new Audio('../assets/music/convite_casamento_karaoke.mp3'),
-]
+const musica = new Audio('../assets/music/sonho_caminhoneiro_karaoke.mp3')
+musica.loop = true
+musica.volume = 0.3
 
-const musicaAleatorias = [
-      new Audio('../assets/music/flores_vida.mp3'),
-      new Audio('../assets/music/nos_braco_teus.mp3'),
-      new Audio('../assets/music/por_voce_que_canto.mp3'),
-      new Audio('../assets/music/voce_nn_sabe_amar.mp3'),
-]
+document.addEventListener('keydown', () => musica.play(), { once: true })
+document.addEventListener('click', () => musica.play(), { once: true })
 
-let musicaAtual = null
-let musicaTemaIndex = 0
+document.addEventListener('click', () => sons.mouseClique.play())
 
-musicaTema.forEach(musica => {
-      musica.loop = true
-      musica.volume = 0.3
-})
-
-musicaAleatorias.forEach(musica => {
-      musica.loop = true
-      musica.volume = 0.3
-})
-
-function tocarMusicaTema() {
-      if (musicaAtual) {
-            musicaAtual.pause()
-            musicaAtual.currentTime = 0
-      }
-      musicaAtual = musicaTema[musicaTemaIndex]
-      musicaAtual.play()
-
-      musicaTemaIndex = (musicaTemaIndex + 1) % musicaTema.length
-}
-
-function tocarMusicaAleatorio() {
-      if (musicaAtual) {
-            musicaAtual.pause()
-            musicaAtual.currentTime = 0
-      }
-      const idx = Math.floor(Math.random() * musicaAleatorias.length)
-      musicaAtual = musicaAleatorias[idx]
-      musicaAtual.play()
-}
-function pararMusica() {
-      if (musicaAtual) {
-            musicaAtual.pause()
-            musicaAtual.currentTime = 0
-            musicaAtual = null
-      }
-}
-
-function iniciarMusica() {
-      const isGamePage = window.location.pathname.includes('jogo') ||
-            document.getElementById('gameCanvas') !== null
-
-      if (isGamePage) {
-            tocarMusicaAleatorio()
-      } else {
-            tocarMusicaTema()
-      }
-}
-document.addEventListener('click', () => {
-      sons.mouseClique.play()
-      if (!musicaAtual) {
-            iniciarMusica()
-      }
-})
-
-document.addEventListener('keydown', () => {
-      if (!musicaAtual) {
-            iniciarMusica()
-      }
-}, { once: true })
 
 // ============ CONTROLES ============
 document.addEventListener('keydown', (e) => {
@@ -220,10 +152,8 @@ function verificarEntrega() {
 function game_over() {
       if (caminhao.carga <= 0 || caminhao.dinheiro <= 0) {
             jogar = false
-            if (musicaAtual) {
-                  musicaAtual.pause()
-                  musicaAtual.currentTime = 0
-            }
+            musica.pause()
+            musica.currentTime = 0
             sons.gameOver.play()
       }
 }
