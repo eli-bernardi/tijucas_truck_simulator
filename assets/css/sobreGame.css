@@ -150,3 +150,72 @@ footer a:hover {
         opacity: 1;
     }
 }
+
+.nossa-equipe h2 {
+    font-family: 'BlackWidow', sans-serif;
+    letter-spacing: 2px;
+    color: #e94560;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.time-lista {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.time-lista li {
+    flex: 1;
+    min-width: 250px;
+    background: rgba(5, 5, 5, 0.6);
+    border: 1px solid rgba(180, 30, 30, 0.3);
+    border-radius: 8px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.time-lista li:hover {
+    transform: translateY(-5px);
+    border-color: rgba(233, 69, 96, 0.5);
+    box-shadow: 0 5px 20px rgba(233, 69, 96, 0.2);
+    background: rgba(10, 10, 10, 0.8);
+}
+
+.time-img {
+    margin-bottom: 20px;
+}
+
+.time-img img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e94560;
+    transition: all 0.3s ease;
+}
+
+.time-img img:hover {
+    transform: scale(1.05);
+    border-color: #ff6b8a;
+    box-shadow: 0 0 15px rgba(233, 69, 96, 0.4);
+}
+
+.time-lista strong {
+    display: block;
+    color: #e94560;
+    font-size: 18px;
+    margin: 15px 0 5px;
+    font-family: 'BlackWidow', sans-serif;
+    letter-spacing: 1px;
+}
+
+.time-desc {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin-top: 12px;
+    line-height: 1.5;
+}

@@ -181,3 +181,229 @@ footer a:hover {
         opacity: 1;
     }
 }
+
+.veiculos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    list-style: none;
+    margin-top: 25px;
+}
+
+.veiculo-card {
+    background: rgba(5, 5, 5, 0.7);
+    border: 1px solid rgba(180, 30, 30, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.veiculo-card:hover {
+    transform: translateX(5px);
+    background: rgba(15, 15, 15, 0.85);
+    border-color: rgba(233, 69, 96, 0.6);
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.2);
+}
+
+.veiculo-img {
+    flex-shrink: 0;
+    width: auto;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(233, 69, 96, 0.3);
+    transition: all 0.3s ease;
+}
+
+.veiculo-card:hover .veiculo-img {
+    border-color: #e94560;
+    transform: scale(1.05);
+}
+
+.veiculo-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.veiculo-info {
+    flex: 1;
+}
+
+.veiculo-info strong {
+    display: block;
+    color: #e94560;
+    font-size: 20px;
+    font-family: 'BlackWidow', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.veiculo-desc {
+    font-size: 14px;
+    color: #aaaaaa;
+    line-height: 1.5;
+    display: block;
+}
+
+.cenarios-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    list-style: none;
+    margin-top: 25px;
+}
+
+.cenario-card {
+    background: rgba(5, 5, 5, 0.7);
+    border: 1px solid rgba(180, 30, 30, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cenario-card:hover {
+    transform: translateX(5px);
+    background: rgba(15, 15, 15, 0.85);
+    border-color: rgba(233, 69, 96, 0.6);
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.2);
+}
+
+.cenario-img {
+    flex-shrink: 0;
+    width: 160px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(233, 69, 96, 0.3);
+    transition: all 0.3s ease;
+}
+
+.cenario-card:hover .cenario-img {
+    border-color: #e94560;
+    transform: scale(1.05);
+}
+
+.cenario-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cenario-info {
+    flex: 1;
+}
+
+.cenario-info strong {
+    display: block;
+    color: #e94560;
+    font-size: 20px;
+    font-family: 'BlackWidow', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.cenario-desc {
+    font-size: 14px;
+    color: #aaaaaa;
+    line-height: 1.5;
+    display: block;
+}
+
+.coletaveis-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    list-style: none;
+    margin-top: 25px;
+}
+
+.coletavel-card {
+    background: rgba(5, 5, 5, 0.7);
+    border: 1px solid rgba(180, 30, 30, 0.3);
+    border-left: 3px solid #e94560;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.coletavel-card:hover {
+    transform: translateX(5px);
+    background: rgba(15, 15, 15, 0.85);
+    border-color: rgba(233, 69, 96, 0.6);
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.2);
+}
+
+.coletavel-img {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(233, 69, 96, 0.3);
+    transition: all 0.3s ease;
+}
+
+.coletavel-card:hover .coletavel-img {
+    border-color: #e94560;
+    transform: scale(1.05);
+}
+
+.coletavel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.coletavel-info {
+    flex: 1;
+}
+
+.coletavel-info strong {
+    display: block;
+    color: #e94560;
+    font-size: 20px;
+    font-family: 'BlackWidow', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.coletavel-desc {
+    font-size: 14px;
+    color: #aaaaaa;
+    line-height: 1.5;
+    display: block;
+}
+
+/* Destaque especial para itens raros */
+.coletavel-card:nth-child(3) .coletavel-info strong {
+    color: #ffd700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.coletavel-card:nth-child(3) {
+    border-left-color: #ffd700;
+}
+
+.coletavel-card:nth-child(3):hover {
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
