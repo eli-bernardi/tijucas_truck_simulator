@@ -11,8 +11,8 @@ class Caminhao extends Obj {
             // Imagens por fase
             this.imagensFase = {
                   1: { src: '../assets/images/veiculo/caminhao_madeira.png', w: 400, h: 120 },
-                  2: { src: '../assets/images/veiculo/caminhao_bau.png', w: 260, h:80 },
-                  3: { src: '../assets/images/veiculo/1620_cacamba.png', w: 250 , h: 80 },
+                  2: { src: '../assets/images/veiculo/caminhao_bau.png', w: 260, h: 80 },
+                  3: { src: '../assets/images/veiculo/1620_cacamba.png', w: 250, h: 80 },
             }
       }
 
@@ -34,7 +34,7 @@ class Caminhao extends Obj {
             this.x += this.dir
             this.y += this.pos
             if (this.x < 20) this.x = 20
-            if (this.x > 1580) this.x = 1580
+            if (this.x > 1150) this.x = 1150
             if (this.y < 70) this.y = 70
             if (this.y > 390) this.y = 390
       }

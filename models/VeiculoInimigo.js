@@ -8,14 +8,11 @@ class VeiculoInimigo extends Obj {
 
     mov_car() {
         this.x -= this.velocidade
-
         if (this.x + this.w < 0) {
-            this.x = 700 + Math.random() * 300
-          
+            this.x = 1200 + Math.random() * 400  // era 700, aumenta para ficar mais longe
             this.y = Math.floor(Math.random() * 4) * 90 + 80
         }
     }
-
     getDano() { return this.dano }
     getMulta() { return this.multa }
 }
