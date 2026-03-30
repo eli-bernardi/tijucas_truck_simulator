@@ -6,16 +6,16 @@ let cenario = new Cenario()
 let caminhao = new Caminhao(80, 210, 240, 60, '../assets/images/veiculo/caminhao_madeira.png')
 
 let inimigos = [
-      new VeiculoInimigo(750, 130, 155, 52, '../assets/images/veiculo/f250.png'),
-      new VeiculoInimigo(870, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
+      // new Vei culoInimigo(750, 130, 155, 52, '../assets/images/veiculo/f250.png'),
+      // new VeiculoInimigo(870, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
       // new VeiculoInimigo(1000, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
-      new VeiculoInimigo(1130, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
-      new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/veiculo/gs1250.png'),
+      // new VeiculoInimigo(1130, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
+      // new VeiculoInimigo(1260, 340, 75, 50, '../assets/images/veiculo/gs1250.png'),
       // new VeiculoInimigo(1390, 130, 155, 52, '../assets/images/veiculo/f250.png'),
       // new VeiculoInimigo(1520, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
-      new VeiculoInimigo(1650, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
+      // new VeiculoInimigo(1650, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
       // new VeiculoInimigo(1780, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
-      new VeiculoInimigo(1910, 340, 120, 60, '../assets/images/veiculo/uno_mille.png'),
+      // new VeiculoInimigo(1910, 340, 120, 60, '../assets/images/veiculo/uno_mille.png'),
 ]
 
 const velocidadesBase = [3.0, 3.5, 2.8, 3.2, 3.6, 2.9, 3.3, 3.7, 2.7, 3.4]
