@@ -15,27 +15,27 @@ class Obj {
             this.imgCarregada = false
         }
         this.img.src = src
-   
+
     }
 
-    des_ret() {
+    des_ret(ctx) {
         if (this.imgCarregada) {
-            des.drawImage(this.img, this.x, this.y, this.w, this.h)
+            ctx.drawImage(this.img, this.x, this.y, this.w, this.h)
         } else {
-            this.desenharFallback()
+            this.desenharFallback(ctx)
         }
     }
-
-    desenharFallback() {
-        des.fillStyle = '#FF0000'
-        des.fillRect(this.x, this.y, this.w, this.h)
-        des.strokeStyle = '#FFFFFF'
-        des.lineWidth = 3
-        des.beginPath()
-        des.moveTo(this.x, this.y)
-        des.lineTo(this.x + this.w, this.y + this.h)
-        des.moveTo(this.x + this.w, this.y)
-        des.lineTo(this.x, this.y + this.h)
-        des.stroke()
+    
+    desenharFallback(ctx) {
+        ctx.fillStyle = '#FF0000'
+        ctx.fillRect(this.x, this.y, this.w, this.h)
+        ctx.strokeStyle = '#FFFFFF'
+        ctx.lineWidth = 3
+        ctx.beginPath()
+        ctx.moveTo(this.x, this.y)
+        ctx.lineTo(this.x + this.w, this.y + this.h)
+        ctx.moveTo(this.x + this.w, this.y)
+        ctx.lineTo(this.x, this.y + this.h)
+        ctx.stroke()
     }
 }

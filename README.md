@@ -8,26 +8,34 @@
 
 O **Tijucas Truck Simulator** é um jogo 2D de direção onde o jogador assume o papel de um caminhoneiro que precisa entregar cargas valiosas atravessando 3 fases com cenários diferentes. Desvie dos veículos inimigos, colete itens na pista e chegue ao ponto de entrega antes de perder toda a carga ou o dinheiro.
 
+Suporta **modo solo** e **modo multiplayer local** (dois jogadores no mesmo teclado).
+
 Desenvolvido como projeto escolar no **SENAI**, utilizando apenas tecnologias web nativas — sem frameworks ou bibliotecas externas.
 
 ---
 
 ## 🎮 Como Jogar
 
-| Tecla | Ação |
-|-------|------|
-| `W` ou `↑` | Mover para cima |
-| `S` ou `↓` | Mover para baixo |
-| `A` ou `←` | Mover para a esquerda |
-| `D` ou `→` | Mover para a direita |
+| Tecla | Jogador 1 | Jogador 2 |
+|-------|-----------|-----------|
+| Cima | `W` | `↑` |
+| Baixo | `S` | `↓` |
+| Esquerda | `A` | `←` |
+| Direita | `D` | `→` |
+
+### Modos de jogo
+- **Solo** — um jogador completa as 3 fases e tenta maximizar o saldo final
+- **Multiplayer** — dois jogadores disputam em telas separadas; vence quem terminar as 3 fases com mais dinheiro
 
 ### Regras
 - Chegue ao ponto **🚩 ENTREGA** no lado direito da tela para concluir a fase
 - Cada colisão com um inimigo reduz sua **carga** e seu **dinheiro**
+- Ao passar de fase, a carga é totalmente restaurada
 - Se a carga ou o dinheiro **zerar**, é Game Over
 - Colete **💰 moedas** (+R$ 50) e **📦 carga extra** (+20% de carga) espalhadas pela pista
 
 ### Fases
+
 | Fase | Cenário | Carga | Valor |
 |------|---------|-------|-------|
 | 1 | Cidade Noturna | Madeira | R$ 1.000 |
@@ -63,12 +71,10 @@ cd tijucas-truck-simulator
 ```bash
 # Python 3
 python -m http.server 5500
-
-# Acesse no navegador:
-# http://localhost:5500
+# Acesse: http://localhost:5500
 ```
 
-> ⚠️ **Importante:** O jogo não funciona abrindo o `index.html` diretamente pelo navegador (file://) devido às políticas de CORS para carregamento de imagens e áudio. Use sempre um servidor local.
+> ⚠️ **Importante:** O jogo não funciona abrindo o `index.html` diretamente pelo navegador (`file://`) devido às políticas de CORS para carregamento de imagens e áudio. Use sempre um servidor local.
 
 ---
 
@@ -81,31 +87,31 @@ tijucas-truck-simulator/
 ├── index.js                    # Loop principal do jogo
 │
 ├── html/
-│   ├── jogoRodando.html        # Página do jogo
-│   ├── sobreGame.html          # Página Sobre
-│   └── manual.html             # Manual do jogo
+│   ├── jogoRodando.html        # Página do jogo (solo e multiplayer)
+│   ├── sobreGame.html          # Sobre o projeto e equipe
+│   └── manual.html             # Manual com controles, fases e inimigos
 │
 ├── models/                     # Classes JavaScript
-│   ├── Obj.js                  # Classe base dos objetos
-│   ├── Caminhao.js             # Jogador
-│   ├── VeiculoInimigo.js       # Inimigos
-│   ├── Coletavel.js            # Itens coletáveis
-│   └── Cenario.js              # Fundo e ambiente
+│   ├── Obj.js                  # Classe base de todos os objetos
+│   ├── Caminhao.js             # Jogador — movimento, dano, troca de fase
+│   ├── VeiculoInimigo.js       # Inimigos — colisão e reposicionamento
+│   ├── Coletavel.js            # Itens coletáveis — dinheiro e carga extra
+│   └── Cenario.js              # Fundo parallax e linha de entrega
 │
 └── assets/
     ├── css/
     │   ├── style.css           # Estilo da página inicial
-    │   ├── jogoRodando.css     # Estilo do jogo
+    │   ├── jogoRodando.css     # Estilo do jogo (HUD, modal, canvas)
     │   ├── sobreGame.css       # Estilo da página Sobre
     │   └── manual.css          # Estilo do manual
     │
     ├── images/
-    │   ├── game/               # Fundos das fases e itens
+    │   ├── game/               # Fundos das fases, itens e logo
     │   └── veiculo/            # Sprites dos veículos
     │
     ├── sounds/                 # Efeitos sonoros (.mp3/.wav)
-    ├── music/                  # Músicas de fundo (.mp3)
-    └── font/                   # Fontes customizadas
+    ├── music/                  # Música de fundo (.mp3)
+    └── font/                   # Fontes customizadas (BlackWidow, OverPass)
 ```
 
 ---
@@ -116,16 +122,17 @@ tijucas-truck-simulator/
 |------------|-----|
 | **HTML5** | Estrutura das páginas e elemento `<canvas>` |
 | **CSS3** | Estilização, animações e layout responsivo |
-| **JavaScript (ES6+)** | Lógica do jogo, classes, game loop |
-| **Canvas API** | Renderização dos gráficos do jogo |
-| **Web Audio API** | Efeitos sonoros e músicas |
+| **JavaScript ES6+** | Lógica do jogo, classes, game loop |
+| **Canvas API** | Renderização dos gráficos |
+| **Web Audio API** | Efeitos sonoros e música de fundo |
 
-### Padrões utilizados
-- **POO (Programação Orientada a Objetos)** — classes com herança (`Caminhao extends Obj`)
-- **Game Loop** com `requestAnimationFrame`
-- **Detecção de colisão** por AABB (Axis-Aligned Bounding Box)
+### Padrões e técnicas
+- **POO** com herança — `Caminhao`, `VeiculoInimigo` e `Coletavel` estendem `Obj`
+- **Game loop** com `requestAnimationFrame`
+- **Detecção de colisão AABB** (Axis-Aligned Bounding Box)
 - **Parallax scrolling** para o fundo em movimento
-- **Sem frameworks** — JavaScript puro (Vanilla JS)
+- **Multiplayer local** — dois canvas independentes com estados separados
+- **Vanilla JS** — sem frameworks ou dependências externas
 
 ---
 
@@ -133,20 +140,19 @@ tijucas-truck-simulator/
 
 | Nome | Função |
 |------|--------|
-| **Eliel Bernardi** | Scrum Master — Desenvolvimento, código, mecânicas e assets |
-| **Carlos Roberto** | Product Owner — Requisitos, testes e validação |
+| **Eliel Bernardi** | Scrum Master — desenvolvimento, código, mecânicas e assets |
+| **Carlos Roberto** | Product Owner — requisitos, testes e validação |
 
 ---
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido para fins **educacionais** no âmbito do curso técnico do **SENAI**.
+Desenvolvido para fins **educacionais** no âmbito do curso técnico do **SENAI**.
 
-Uso livre para fins de estudo e aprendizado.  
-Para outros usos, entre em contato com os autores.
+Uso livre para estudo e aprendizado. Para outros usos, entre em contato com os autores.
 
 ---
 
 <p align="center">
-  Desenvolvido por <a href="https://github.com/eli-bernardi">Eliel Bernardi</a> © 2026.
+  Desenvolvido por <a href="https://github.com/eli-bernardi">Eliel Bernardi</a> © 2026
 </p>
