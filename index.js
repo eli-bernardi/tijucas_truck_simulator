@@ -2,15 +2,15 @@ let des = document.getElementById('des').getContext('2d')
 
 // ============ OBJETOS ============
 let cenario = new Cenario()
-
-let caminhao = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/caminhao_madeira.png')
+let telaFinal = false
+let caminhao = new Caminhao(80, 210, 300, 80, '../assets/images/veiculo/caminhao_madeira.png')
 
 let inimigos = [
-      new VeiculoInimigo(750, 130, 155, 52, '../assets/images/veiculo/f250.png'),
-      new VeiculoInimigo(950, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
-      new VeiculoInimigo(1150, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
-      new VeiculoInimigo(1350, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
-      new VeiculoInimigo(1550, 340, 120, 60, '../assets/images/veiculo/uno_mille.png'),
+      // new VeiculoInimigo(750, 130, 155, 52, '../assets/images/veiculo/f250.png'),
+      // new VeiculoInimigo(950, 260, 140, 50, '../assets/images/veiculo/fusca.png'),
+      // new VeiculoInimigo(1150, 380, 145, 52, '../assets/images/veiculo/chevette.png'),
+      // new VeiculoInimigo(1350, 210, 155, 52, '../assets/images/veiculo/saveiro.png'),
+      // new VeiculoInimigo(1550, 340, 120, 60, '../assets/images/veiculo/uno_mille.png'),
 ]
 
 const velocidadesBase = [3.0, 3.5, 2.8, 3.2, 2.6]
@@ -20,6 +20,12 @@ let fase = 1
 let cargaNome = 'Levando Madeira'
 let cargaValor = 1000
 let jogar = true
+
+// ============ IMAGENS PARA TELA FINAL ============
+const imagensTelaFinal = {
+imagemFinal : new Image(),
+}
+imagensTelaFinal.imagemFinal.src = '../assets/images/game/final.png'
 
 // ============ ÁUDIO ============
 const sons = {
@@ -40,6 +46,7 @@ document.addEventListener('click', () => {
       sons.mouseClique.play()
 }, { once: true })
 
+
 // ============ CONTROLES ============
 document.addEventListener('keydown', (e) => {
       if (!jogar) return
@@ -53,10 +60,11 @@ document.addEventListener('keyup', (e) => {
       if (e.key === 'a' || e.key === 'ArrowLeft' || e.key === 'd' || e.key === 'ArrowRight') caminhao.dir = 0
 })
 
+
 // ============ FUNÇÕES ============
 function spawnarColetavel() {
       if (Math.random() < 0.005 && jogar) {
-            const tipo = Math.random() < 0.7 ? 'dinheiro' : 'cargaExtra'
+            const tipo = Math.random() < 0.5 ? 'dinheiro' : 'cargaExtra'
             const imagem = tipo === 'dinheiro'
                   ? '../assets/images/game/dinheiro.png'
                   : '../assets/images/game/carga-extra.png'
@@ -107,7 +115,7 @@ const cargas = {
 }
 
 function verificarEntrega() {
-      if (caminhao.x + caminhao.w > 1550 && jogar) {
+      if (caminhao.x + caminhao.w > 1150 && jogar) {
             caminhao.dinheiro += cargaValor
             caminhao.entregas++
             sons.entrega.play()
@@ -118,12 +126,16 @@ function verificarEntrega() {
                   cenario.fase = fase
                   caminhao.trocarImagemFase(fase)
                   caminhao.x = 80
+                  caminhao.carga = 100
                   cargaNome = cargas[fase].nome
                   cargaValor = cargas[fase].valor
                   inimigos.forEach(i => i.velocidade += 1)
             } else {
-                  alert('🏆 PARABÉNS! Você completou todas as entregas!')
-                  reiniciarJogo()
+                  jogar = false
+                  telaFinal = true
+                  musica.pause()
+                  musica.currentTime = 0
+                  sons.entrega.play()
             }
       }
 }
@@ -138,7 +150,8 @@ function game_over() {
 }
 
 function reiniciarJogo() {
-      caminhao = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/caminhao_madeira.png')
+      telaFinal = false
+      caminhao = new Caminhao(80, 210, 300, 80, '../assets/images/veiculo/caminhao_madeira.png')
       fase = 1
       cargaNome = cargas[1].nome
       cargaValor = cargas[1].valor
@@ -154,6 +167,7 @@ function reiniciarJogo() {
       })
 }
 
+
 // ============ LOOP ============
 function desenha() {
       if (jogar) {
@@ -167,6 +181,41 @@ function desenha() {
             document.getElementById('fase').textContent = fase + '/3'
             document.getElementById('cargaNome').textContent = cargaNome
             document.getElementById('cargaValor').textContent = 'R$ ' + cargaValor
+      } else if (telaFinal) {
+            des.fillStyle = 'rgba(0,0,0,0.88)'
+            des.fillRect(0, 0, 1200, 500)
+            des.textAlign = 'center'
+
+            des.fillStyle = '#f1c40f'
+            des.font = 'bold 52px Arial'
+            des.fillText('ENTREGAS CONCLUÍDAS!', 600, 130)
+
+            des.fillStyle = 'white'
+            des.font = '26px Arial'
+            des.fillText('Dinheiro total: R$ ' + caminhao.dinheiro, 600, 210)
+
+            des.fillStyle = '#aaa'
+            des.font = '18px Arial'
+            des.fillText('Entregas realizadas: ' + caminhao.entregas + '/3', 600, 255)
+
+            // Botão "Jogar novamente"
+            des.fillStyle = '#27ae60'
+            des.beginPath()
+            des.roundRect(370, 300, 220, 54, 10)
+            des.fill()
+            des.fillStyle = 'white'
+            des.font = 'bold 20px Arial'
+            des.fillText('Jogar novamente', 480, 333)
+
+            // Botão "Voltar ao início"
+            des.fillStyle = '#2980b9'
+            des.beginPath()
+            des.roundRect(610, 300, 220, 54, 10)
+            des.fill()
+            des.fillStyle = 'white'
+            des.font = 'bold 20px Arial'
+            des.fillText('Voltar ao início', 720, 333)
+
       } else {
             des.fillStyle = 'rgba(0,0,0,0.85)'
             des.fillRect(0, 0, 1200, 500)
@@ -206,4 +255,21 @@ function main() {
       atualiza()
       requestAnimationFrame(main)
 }
+
+document.getElementById('des').addEventListener('click', (e) => {
+      if (!telaFinal) return
+
+      const rect = e.target.getBoundingClientRect()
+      const x = (e.clientX - rect.left) * (1200 / rect.width)
+      const y = (e.clientY - rect.top) * (500 / rect.height)
+
+      if (x >= 370 && x <= 590 && y >= 300 && y <= 354) {
+            telaFinal = false
+            reiniciarJogo()
+      }
+      if (x >= 610 && x <= 830 && y >= 300 && y <= 354) {
+            window.location.href = '../index.html'
+      }
+})
+
 main()

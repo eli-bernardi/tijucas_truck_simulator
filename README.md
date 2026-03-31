@@ -148,5 +148,5 @@ Para outros usos, entre em contato com os autores.
 ---
 
 <p align="center">
-  Desenvolvido por <a href="https://github.com/eli-bernardi">Eliel Bernardi</a> © 2026
+  Desenvolvido por <a href="https://github.com/eli-bernardi">Eliel Bernardi</a> © 2026.
 </p>

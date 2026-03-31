@@ -15,6 +15,7 @@ class Obj {
             this.imgCarregada = false
         }
         this.img.src = src
+   
     }
 
     des_ret() {

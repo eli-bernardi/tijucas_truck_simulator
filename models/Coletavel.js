@@ -5,6 +5,7 @@ class Coletavel extends Obj {
         this.velocidade = 4
     }
     mov_car() {
+        
         this.x -= this.velocidade
     }
 }

@@ -47,6 +47,7 @@ class Cenario {
         des.fillText('🚩 ENTREGA', 1500, 29)  // ← corrigido
     }
 
+    
     atualizarLinhas() {
         this.offset += this.vel
     }
