@@ -15,4 +15,4 @@ class VeiculoInimigo extends Obj {
     }
     getDano() { return this.dano }
     getMulta() { return this.multa }
-} 
+}  

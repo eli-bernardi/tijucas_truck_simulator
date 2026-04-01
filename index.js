@@ -13,7 +13,7 @@ const sons = {
       gameOver: new Audio('../assets/sounds/game-over.mp3'),
       mouseClique: new Audio('../assets/sounds/mouse-click.mp3'),
 }
-
+ 
 const musica = new Audio('../assets/music/sonho_caminhoneiro_karaoke.mp3')
 musica.loop = true
 musica.volume = 0.3

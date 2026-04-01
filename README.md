@@ -13,7 +13,7 @@ Suporta **modo solo** e **modo multiplayer local** (dois jogadores no mesmo tecl
 Desenvolvido como projeto escolar no **SENAI**, utilizando apenas tecnologias web nativas — sem frameworks ou bibliotecas externas.
 
 ---
-
+ 
 ## 🎮 Como Jogar
 
 | Tecla | Jogador 1 | Jogador 2 |

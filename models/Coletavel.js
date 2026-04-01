@@ -9,4 +9,4 @@ class Coletavel extends Obj {
         
         this.x -= this.velocidade
     }
-} 
+}  

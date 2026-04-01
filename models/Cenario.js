@@ -16,7 +16,7 @@ class Cenario {
         img.src = src
         return img
     }
-
+ 
     _desenharCamada(ctx, img, offset, y, h) {
         if (!img.complete || img.naturalWidth === 0) return
         const w = 1600

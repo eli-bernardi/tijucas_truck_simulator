@@ -16,7 +16,7 @@ class Obj {
         }
         this.img.src = src
 
-    }
+    } 
 
     des_ret(ctx) {
         if (this.imgCarregada) {

@@ -15,7 +15,7 @@ class Caminhao extends Obj {
                   3: { src: '../assets/images/veiculo/1620_cacamba.png', w: 250, h: 80 },
             }
       }
-
+ 
       trocarImagemFase(fase) {
             const dados = this.imagensFase[fase]
             this.w = dados.w
