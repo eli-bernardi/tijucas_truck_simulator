@@ -55,8 +55,17 @@ function criarInimigos() {
       ]
 }
 
-let caminhao = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/caminhao_madeira.png')
-let caminhao2 = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/caminhao_bau.png')
+let caminhao = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/scania-madeira.png')
+
+const imagensFaseJ2 = {
+      1: { src: '../assets/images/veiculo/bob-na-madeira.png', w: 260, h: 80 },
+      2: { src: '../assets/images/veiculo/atego-thermoking.png', w: 250, h: 80 },
+      3: { src: '../assets/images/veiculo/atego-chapeu-virado.png', w: 250, h: 80 },
+}
+
+let caminhao2 = new Caminhao(80, 210, 260, 80, '../assets/images/veiculo/bob-na-madeira.png', imagensFaseJ2)
+
+
 
 let inimigos = criarInimigos()
 let inimigos2 = criarInimigos()
@@ -199,10 +208,10 @@ function verificarEntrega() {
                   else telaFinal = true
             } else {
                   telaFinal = true
-                  musica.pause()      // Para a música de fundo
+                  musica.pause()
                   musica.currentTime = 0
-                  musicaVitoria.currentTime = 0  // Reinicia a música de vitória
-                  musicaVitoria.play()           // Toca a música de vitória
+                  musicaVitoria.currentTime = 0
+                  musicaVitoria.play()
             }
       }
 }
@@ -227,10 +236,10 @@ function verificarEntrega2() {
             jogar2 = false
             if (!jogar) {
                   resolverVencedor()
-                  musica.pause()           // Para a música de fundo
+                  musica.pause()
                   musica.currentTime = 0
                   musicaVitoria.currentTime = 0
-                  musicaVitoria.play()    // Toca a música de vitória
+                  musicaVitoria.play()
             } else {
                   telaFinal2 = true
             }
@@ -243,17 +252,17 @@ function resolverVencedor() {
       else vencedor = 'empate'
       telaFinal = true
       telaFinal2 = true
-      musica.pause()                    // Para a música de fundo
+      musica.pause()
       musica.currentTime = 0
-      musicaVitoria.currentTime = 0     // Reinicia a música de vitória
-      musicaVitoria.play()              // Toca a música de vitória
+      musicaVitoria.currentTime = 0
+      musicaVitoria.play()
 }
 
 
 // ============ REINICIAR ============
 function reiniciarJogo() {
-      caminhao = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/caminhao_madeira.png')
-      caminhao2 = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/caminhao_bau.png')
+      caminhao = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/scania-madeira.png')
+      caminhao2 = new Caminhao(80, 210, 400, 120, '../assets/images/veiculo/bob-na-madeira.png')
 
       fase = 1; cargaNome = cargas[1].nome; cargaValor = cargas[1].valor
       fase2 = 1; cargaNome2 = cargas[1].nome; cargaValor2 = cargas[1].valor

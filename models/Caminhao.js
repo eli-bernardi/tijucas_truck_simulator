@@ -1,5 +1,5 @@
 class Caminhao extends Obj {
-      constructor(x, y, w, h, src) {
+      constructor(x, y, w, h, src, imagensFaseCustom) {
             super(x, y, w, h, src)
             this.dir = 0
             this.pos = 0
@@ -9,9 +9,9 @@ class Caminhao extends Obj {
             this.entregas = 0
 
             // Imagens por fase
-            this.imagensFase = {
-                  1: { src: '../assets/images/veiculo/caminhao_madeira.png', w: 300, h: 80 }, // era 800
-                  2: { src: '../assets/images/veiculo/caminhao_bau.png', w: 260, h: 80 },
+            this.imagensFase = imagensFaseCustom || {
+                  1: { src: '../assets/images/veiculo/scania-madeira.png', w: 300, h: 80 },
+                  2: { src: '../assets/images/veiculo/fh-thermoking.png', w: 260, h: 80 },
                   3: { src: '../assets/images/veiculo/1620_cacamba.png', w: 250, h: 80 },
             }
       }
