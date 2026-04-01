@@ -51,7 +51,7 @@ class Cenario {
     atualizarLinhas() {
         this.offset += this.vel
     }
-
+ 
     resetar() {
         this.fase = 1
         this.offset = 0

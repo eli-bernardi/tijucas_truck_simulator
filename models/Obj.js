@@ -24,7 +24,7 @@ class Obj {
         } else {
             this.desenharFallback(ctx)
         }
-    }
+    } 
     
     desenharFallback(ctx) {
         ctx.fillStyle = '#FF0000'
