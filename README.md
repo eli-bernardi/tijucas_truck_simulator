@@ -13,7 +13,7 @@ Suporta **modo solo** e **modo multiplayer local** (dois jogadores no mesmo tecl
 Desenvolvido como projeto escolar no **SENAI**, utilizando apenas tecnologias web nativas — sem frameworks ou bibliotecas externas.
 
 ---
- 
+
 ## 🎮 Como Jogar
 
 | Tecla | Jogador 1 | Jogador 2 |
@@ -44,6 +44,41 @@ Desenvolvido como projeto escolar no **SENAI**, utilizando apenas tecnologias we
 
 ---
 
+## 📐 Regras de Negócio
+
+### Início do jogo
+- O jogador inicia cada partida com **R$ 1.500** de saldo e **100%** de carga
+
+### Colisão com inimigo
+- Cada colisão reduz **20% de carga** e **R$ 200** do saldo
+- Carga e saldo nunca ficam negativos (mínimo 0)
+
+### Game Over
+- Ocorre quando a **carga** ou o **saldo** chegam a 0
+
+### Itens coletáveis
+| Item | Efeito |
+|------|--------|
+| 💰 Moeda | + R$ 50 no saldo |
+| 📦 Carga Extra | + 20% de carga (máximo 100%) |
+
+- Aparecem aleatoriamente na pista com **0,5% de chance por frame**
+- Um inimigo que passa pela esquerda da tela sem ser atingido concede **+ R$ 50**
+
+### Entrega
+- Ao chegar ao ponto de entrega, o **valor da fase é somado ao saldo**
+- A **carga é restaurada para 100%** ao passar de fase
+
+### Dificuldade progressiva
+- A cada fase completada, a **velocidade dos inimigos aumenta em +1**
+
+### Multiplayer
+- Vence quem tiver **maior saldo** após completar as 3 fases
+- Cada jogador possui **carga, saldo e fase totalmente independentes**
+- Quando os saldos são iguais, o resultado é declarado como **empate**
+
+---
+
 ## 🚀 Instalação e Execução
 
 ### Pré-requisitos
@@ -66,13 +101,6 @@ cd tijucas-truck-simulator
    - Abra a pasta no VS Code
    - Clique com o botão direito em `index.html`
    - Selecione **"Open with Live Server"**
-
-4. **Ou use o Python HTTP Server**
-```bash
-# Python 3
-python -m http.server 5500
-# Acesse: http://localhost:5500
-```
 
 > ⚠️ **Importante:** O jogo não funciona abrindo o `index.html` diretamente pelo navegador (`file://`) devido às políticas de CORS para carregamento de imagens e áudio. Use sempre um servidor local.
 
